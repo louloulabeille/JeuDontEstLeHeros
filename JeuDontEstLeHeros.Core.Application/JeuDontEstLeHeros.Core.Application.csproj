@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JeuDontEstLeHeros.Core.Infrastructure\JeuDontEstLeHeros.Core.Infrastructure.csproj" />
+    <ProjectReference Include="..\JeuDontEstLeHeros.Core.Interfaces\JeuDontEstLeHeros.Core.Interfaces.csproj" />
+    <ProjectReference Include="..\JeuDontOnEstLeHeros\JeuDontEstLeHeros.Core.Models.csproj" />
+  </ItemGroup>
+
+</Project>

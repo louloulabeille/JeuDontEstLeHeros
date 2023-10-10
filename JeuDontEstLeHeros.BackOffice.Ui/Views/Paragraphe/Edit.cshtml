@@ -1,0 +1,51 @@
+﻿@model JeuDontEstLeHeros.Core.Models.Paragraphe
+
+@{
+    ViewData["Title"] = "Edits";
+}
+
+<h1>Edits</h1>
+
+<h4>Paragraphe</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edits">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input type="hidden" asp-for="Id" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Numero" class="control-label"></label>
+                <input asp-for="Numero" class="form-control" />
+                <span asp-validation-for="Numero" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Titre" class="control-label"></label>
+                <input asp-for="Titre" class="form-control" data-val-required="Le titre du paragraphe est obligatoire." />
+                <span asp-validation-for="Titre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" cols="80" rows="10" data-val-required="La description du paragraphe est obligatoire."></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionId" class="control-label">Question</label>
+                <select asp-for="QuestionId" asp-items="this.ViewBag.Questions" class="form-control" data-val-required="La question est obligatoire."></select>
+                <span asp-validation-for="QuestionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

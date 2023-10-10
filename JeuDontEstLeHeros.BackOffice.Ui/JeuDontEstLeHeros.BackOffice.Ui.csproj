@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\JeuDontEstLeHeros</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JeuDontEstLeHeros.Core.Application\JeuDontEstLeHeros.Core.Application.csproj" />
+    <ProjectReference Include="..\JeuDontEstLeHeros.Core.Infrastructure\JeuDontEstLeHeros.Core.Infrastructure.csproj" />
+    <ProjectReference Include="..\JeuDontOnEstLeHeros\JeuDontEstLeHeros.Core.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.10" />
+  </ItemGroup>
+
+</Project>

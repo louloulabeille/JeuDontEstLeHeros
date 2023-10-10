@@ -1,0 +1,32 @@
+﻿@using JeuDontEstLeHeros.Core.Application.DTO;
+@model ICollection<AventureDTO>
+@{
+    ViewData["Title"] = "Aventure Page";
+}
+
+<div class="container">
+    <div class="row text-center">
+        <div class="col"><h1>@ViewBag.MonTitre</h1></div>
+    </div>
+    <div class="row text-center m-md-4 justify-content-center">
+        <div class="col-sm-12"><a asp-controller="Aventure" asp-action="Create" class="btn btn-outline-secondary">Nouvelle Aventure</a></div>
+        
+    </div>
+    <div class="row text-center small">
+        <h4>Vos dernières aventures</h4>
+    </div>
+    <div class="row text-center justify-content-center">
+        @{
+            foreach (var item in Model)
+            {
+                <a href="#" class="card m-2 border" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Nom</h5>
+                    </div>
+                </a>
+            }
+        }
+
+    </div>
+
+</div>

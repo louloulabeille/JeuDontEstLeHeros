@@ -1,0 +1,60 @@
+﻿@model IEnumerable<JeuDontEstLeHeros.Core.Models.Paragraphe>
+
+@{
+    ViewData["Title"] = "Liste des réponses";
+}
+
+<h1>Liste des réponses</h1>
+
+<p>
+    <a asp-action="Create">Création d'un paragraphe</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            @* <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.Numero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Titre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuestionId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @* <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td> *@
+            <td>
+                @Html.DisplayFor(modelItem => item.Numero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  Id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { Id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { Id=item.Id
+                })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,5 +1,5 @@
 ﻿using JeuDontEstLeHeros.Core.Infrastructure.Database;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+//using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 
 namespace JeuDontEstLeHeros.UI.Instension.Builder

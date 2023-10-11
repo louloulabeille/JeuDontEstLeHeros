@@ -21,14 +21,11 @@ namespace JeuDontEstLeHeros.Core.Application.WorkOfUnit
             _repository = new QuestionRepository(dbcontext);
         }
 
+        public IQuestionRepository Entities => _repository;
+
         public void Dispose()
         {
             _dbcontext.Dispose();
-        }
-
-        public IQuestionRepository GetInstance()
-        {
-            return _repository;
         }
 
         public int save()

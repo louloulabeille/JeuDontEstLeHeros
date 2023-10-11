@@ -9,7 +9,8 @@ namespace JeuDontEstLeHeros.Core.Interfaces.WorkOfUnit
 {
     public interface IParagrapheWorkOfUnit : IDisposable
     {
-        public IParagrapheRepository GetInstance();
+        public IParagrapheRepository Entities { get; }
+        //public IParagrapheRepository GetInstance();
         public int Save();
     }
 }

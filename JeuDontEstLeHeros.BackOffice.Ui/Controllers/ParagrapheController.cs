@@ -28,7 +28,7 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<Paragraphe> paragraphes = _workOfUnit.GetInstance().GatAll().ToList();
+            List<Paragraphe> paragraphes = _workOfUnit.Entities.GatAll().ToList();
             return View(paragraphes);
         }
 
@@ -38,7 +38,7 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Controllers
             IActionResult result = BadRequest();
             try
             {
-                Paragraphe? paragraphe = _workOfUnit.GetInstance().GetParagrapheById(Id);
+                Paragraphe? paragraphe = _workOfUnit.Entities.GetParagrapheById(Id);
                 if (paragraphe is not null)
                 {
                     result = this.View(paragraphe);
@@ -60,7 +60,7 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Controllers
             try
             {
                 AddQuestion();
-                Paragraphe? paragraphe = _workOfUnit.GetInstance().GetParagrapheById(Id);
+                Paragraphe? paragraphe = _workOfUnit.Entities.GetParagrapheById(Id);
                 if (paragraphe is not null)
                 {
                     result = this.View(paragraphe);
@@ -95,7 +95,7 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Controllers
             {
                 if (paragraphe is not null && this.ModelState.IsValid) {
 
-                    _workOfUnit.GetInstance().Add(new Paragraphe()
+                    _workOfUnit.Entities.Add(new Paragraphe()
                     {
                         Numero = paragraphe.Numero,
                         Titre = paragraphe.Titre,
@@ -129,7 +129,7 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Controllers
             {
                 if (paragraphe is not null && paragraphe.Id > 0 && this.ModelState.IsValid)
                 {
-                    _workOfUnit.GetInstance().Update(paragraphe);
+                    _workOfUnit.Entities.Update(paragraphe);
                     _workOfUnit.Save();
                     result = this.RedirectToAction(nameof(Index));
                 }
@@ -157,7 +157,7 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Controllers
         private void AddQuestion()
         {
             Questions.Clear();
-            Questions.AddRange(_questionWorkOfUnit.GetInstance().GetAll().Select(x => new SelectListItem()
+            Questions.AddRange(_questionWorkOfUnit.Entities.GetAll().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.Titre,

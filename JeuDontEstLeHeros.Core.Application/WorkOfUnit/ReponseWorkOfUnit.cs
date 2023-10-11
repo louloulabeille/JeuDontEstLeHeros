@@ -15,7 +15,8 @@ namespace JeuDontEstLeHeros.Core.Application.WorkOfUnit
     {
         private readonly HerosDbcontext _dbcontext;
         private readonly IReponseRepository _entities;
-        //public readonly IReponseRepository Entities;
+
+        public IReponseRepository Entities => _entities;
 
         public ReponseWorkOfUnit(HerosDbcontext dbcontext)
         {
@@ -33,9 +34,5 @@ namespace JeuDontEstLeHeros.Core.Application.WorkOfUnit
             return _dbcontext.SaveChanges();
         }
 
-        public IReponseRepository GetInstance()
-        {
-            return _entities;
-        }
     }
 }

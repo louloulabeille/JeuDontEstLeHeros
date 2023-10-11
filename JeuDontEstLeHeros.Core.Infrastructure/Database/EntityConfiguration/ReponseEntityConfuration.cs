@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace JeuDontEstLeHeros.Core.Infrastructure.Database.EntityConfiguration
 {
-    public class ReponseEntityConfurationcs : IEntityTypeConfiguration<Reponse>
+    public class ReponseEntityConfuration : IEntityTypeConfiguration<Reponse>
     {
         public void Configure(EntityTypeBuilder<Reponse> builder)
         {

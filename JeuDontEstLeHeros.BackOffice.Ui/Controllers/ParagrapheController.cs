@@ -164,7 +164,6 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Controllers
             }));
 
             this.ViewBag.Questions = Questions;
-
         }
         #endregion
     }

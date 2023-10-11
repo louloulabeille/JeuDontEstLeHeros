@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\JeuDontEstLeHeros</DockerfileContext>
+    <UserSecretsId>dc7ec32f-1fcd-4a51-9cd5-0d86f3ea835b</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

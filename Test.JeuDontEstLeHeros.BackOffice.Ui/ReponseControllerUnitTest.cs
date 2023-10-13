@@ -4,6 +4,7 @@ using JeuDontEstLeHeros.Core.Infrastructure.Database;
 using JeuDontEstLeHeros.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Test.JeuDontEstLeHeros.Infrastructure;
 
 namespace Test.JeuDontEstLeHeros.BackOffice.Ui
 {
@@ -11,11 +12,10 @@ namespace Test.JeuDontEstLeHeros.BackOffice.Ui
     {
         private readonly HerosDbcontext _dbcontext;
 
-
         public ReponseControllerUnitTest()
         {
             // mise en place d'une base de données en mémoire
-            _dbcontext = CreateDbContextMemory();
+            _dbcontext = TestHeroDbContextMemory.CreateDbContextMemory();
 
             var data = new List<Reponse>()
             {
@@ -66,16 +66,5 @@ namespace Test.JeuDontEstLeHeros.BackOffice.Ui
         }
         #endregion
 
-        #region méthode private
-        private HerosDbcontext CreateDbContextMemory()
-        {
-            var builder = new DbContextOptionsBuilder<HerosDbcontext>();
-            builder.UseInMemoryDatabase("Reponse_Dev");
-            var option = builder.Options;
-
-            return new HerosDbcontext(option);
-        }
-
-        #endregion
     }
 }

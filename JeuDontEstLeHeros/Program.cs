@@ -1,3 +1,4 @@
+
 using JeuDontEstLeHeros.UI.Instension.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContextInstension(builder.Configuration);
+builder.Services.AddRepoDataScopedInstension();
 
 var app = builder.Build();
 

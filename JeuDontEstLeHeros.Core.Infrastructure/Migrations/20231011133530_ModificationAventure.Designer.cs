@@ -4,6 +4,7 @@ using JeuDontEstLeHeros.Core.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JeuDontEstLeHeros.Core.Infrastructure.Migrations
 {
     [DbContext(typeof(HerosDbcontext))]
-    partial class HerosDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20231011133530_ModificationAventure")]
+    partial class ModificationAventure
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

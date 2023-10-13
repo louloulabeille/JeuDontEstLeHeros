@@ -1,4 +1,7 @@
 ﻿using JeuDontEstLeHeros.Core.Application.DTO;
+using JeuDontEstLeHeros.Core.Application.WorkOfUnit;
+using JeuDontEstLeHeros.Core.Infrastructure.Database;
+using JeuDontEstLeHeros.Core.Interfaces.WorkOfUnit;
 using JeuDontEstLeHeros.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -8,15 +11,20 @@ namespace JeuDontEstLeHeros.UI.Controllers
     public class AventureController : Controller
     {
         #region Propriété
-        private readonly ILogger<AventureController> _logger;
-        private readonly AventureDTO aventure = new ();
+        //private readonly ILogger<AventureController> _logger;
+        private readonly IAventureWorkOfUnit _avantureWorkOfUnit;
+
+        [BindProperty]
+        public AventureDTO Aventure { get; set; } = new();
+
         #endregion
 
 
         #region Constructeur
-        public AventureController(ILogger<AventureController> logger)
+        public AventureController(HerosDbcontext dbcontext)
         {
-            _logger = logger;
+            //_logger = logger;
+            _avantureWorkOfUnit = new AventureWorkOfUnit(dbcontext);
         }
         #endregion
 
@@ -30,15 +38,32 @@ namespace JeuDontEstLeHeros.UI.Controllers
         public IActionResult Index()
         {
             ViewBag.MonTitre = "Aventures";
+            IActionResult result = this.BadRequest();
+            try
+            {
+                List<AventureDTO> aventures =  _avantureWorkOfUnit.GetAll().Select(x=> new AventureDTO()
+                {
+                    Id = x.Id,
+                    Nom = x.Nom,
+                    Description = x.Description,
+                    DateCreation = x.DateCreation,
+                }).ToList();
 
+                result = this.View(aventures);
+
+            }catch
+            {
+                result = this.Problem("Problème au niveau de la récupération des données.");
+            }
+/*
             List<AventureDTO> list = new ()
             {
                 new AventureDTO(){Nom = "L'attaque des titans", Id= 1 , Description = "Des titans attaquent les capitales du monde entier."},
                 new AventureDTO(){Nom = "L'espoir", Id= 2 , Description = "Après la défaite des nains, l'espoir renait après la naissance du nouveau héros."}
             };
+*/
 
-
-            return View(list);
+            return result;
         }
 
 

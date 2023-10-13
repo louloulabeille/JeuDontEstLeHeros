@@ -13,5 +13,6 @@ namespace JeuDontEstLeHeros.Core.Application.DTO
         [Required]
         public string Nom { get; set; }
         public string Description { get; set; }
+        public DateTime DateCreation { get; set; } = DateTime.Now;
     }
 }

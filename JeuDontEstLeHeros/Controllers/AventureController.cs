@@ -41,7 +41,7 @@ namespace JeuDontEstLeHeros.UI.Controllers
             IActionResult result = this.BadRequest();
             try
             {
-                List<AventureDTO> aventures =  _avantureWorkOfUnit.GetAll().Select(x=> new AventureDTO()
+                List<AventureDTO> aventures =  _avantureWorkOfUnit.Aventures.GetAll().Select(x=> new AventureDTO()
                 {
                     Id = x.Id,
                     Nom = x.Nom,
@@ -73,7 +73,7 @@ namespace JeuDontEstLeHeros.UI.Controllers
         /// <returns></returns>
         [HttpGet]
         public IActionResult Create() {
-            var result = View();
+            var result = View(new AventureDTO());
 
             return result;
         }
@@ -86,7 +86,28 @@ namespace JeuDontEstLeHeros.UI.Controllers
         [HttpPost]
         public IActionResult Create ( [FromForm] AventureDTO aventure)
         {
-            var result = BadRequest();
+            IActionResult result = BadRequest();
+            try
+            {
+                if (aventure != null && this.ModelState.IsValid)
+                {
+                    _avantureWorkOfUnit.Aventures.Add(new Core.Models.Aventure()
+                    {
+                        Id= aventure.Id,
+                        Nom = aventure.Nom,
+                        Description = aventure.Description,
+                        DateCreation = aventure.DateCreation,
+                    });
+
+                    
+                    result = this.RedirectToAction(nameof(Index));
+                }
+                else result = this.View(aventure);
+            }
+            catch
+            {
+                result = this.Problem("Problème au niveau de l'enregistrement d'une aventure");
+            }
 
             return result;
         }

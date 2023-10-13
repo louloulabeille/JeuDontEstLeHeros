@@ -21,7 +21,7 @@ namespace JeuDontEstLeHeros.Core.Application.WorkOfUnit
             _entities = new ParagrapheRepository(dbcontext);
         }
 
-        public IParagrapheRepository Entities => _entities;
+        public IParagrapheRepository Paragraphes => _entities;
 
         public void Dispose()
         {

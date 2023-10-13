@@ -24,7 +24,7 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Controllers
 
         public IActionResult Index()
         {
-            List<Reponse> list = _workOfUnit.Entities.ReponseByDesc(11).ToList();
+            List<Reponse> list = _workOfUnit.Reponses.ReponseByDesc(11).ToList();
             return View(list);
         }
 
@@ -36,7 +36,7 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Controllers
             {
                 if (reponse != null && this.ModelState.IsValid)
                 {
-                    _workOfUnit.Entities.Add(reponse);
+                    _workOfUnit.Reponses.Add(reponse);
                     _workOfUnit.save();
                     result = this.RedirectToAction(nameof(Index));
                     this.ModelState.Clear();

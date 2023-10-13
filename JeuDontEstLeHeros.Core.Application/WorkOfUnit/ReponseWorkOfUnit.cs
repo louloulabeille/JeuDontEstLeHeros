@@ -16,7 +16,7 @@ namespace JeuDontEstLeHeros.Core.Application.WorkOfUnit
         private readonly HerosDbcontext _dbcontext;
         private readonly IReponseRepository _entities;
 
-        public IReponseRepository Entities => _entities;
+        public IReponseRepository Reponses => _entities;
 
         public ReponseWorkOfUnit(HerosDbcontext dbcontext)
         {

@@ -21,7 +21,7 @@ namespace JeuDontEstLeHeros.Core.Application.WorkOfUnit
             _repository = new QuestionRepository(dbcontext);
         }
 
-        public IQuestionRepository Entities => _repository;
+        public IQuestionRepository Questions => _repository;
 
         public void Dispose()
         {

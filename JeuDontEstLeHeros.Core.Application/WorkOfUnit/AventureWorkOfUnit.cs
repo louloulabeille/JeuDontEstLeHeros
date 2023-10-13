@@ -25,29 +25,16 @@ namespace JeuDontEstLeHeros.Core.Application.WorkOfUnit
             _repository = new AventureRepository(dbcontext);
         }
 
-        public void Add(Aventure aventure)
+        public IAventureRepository Aventures => _repository;
+
+        public void Dispose()
         {
-            _repository.Add(aventure);
+            _dbcontext.Dispose();
         }
 
-        public IEnumerable<Aventure> GetAll()
+        public void Save()
         {
-            return _repository.GetAll();
-        }
-
-        public Aventure? GetAventureById(int id)
-        {
-            return _repository.GetAventureById(id);
-        }
-
-        public void Remove(Aventure aventure)
-        {
-            _repository.Remove(aventure);
-        }
-
-        public void Update(Aventure aventure)
-        {
-            _repository.Update(aventure);
+            _dbcontext.SaveChanges();
         }
     }
 }

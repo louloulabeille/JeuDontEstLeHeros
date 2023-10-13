@@ -24,10 +24,8 @@ namespace Test.JeuDontEstLeHeros
         [Fact]
         public void TestListAventureController()
         {
-
             AventureController controller = new(_dbcontext);
             var result = controller.Index();
-            
 
             // Asset
             Assert.NotNull(result);
@@ -37,8 +35,51 @@ namespace Test.JeuDontEstLeHeros
             Assert.IsType<List<AventureDTO>>(value);
             Assert.True(value.Count == 2);
 
-        
+        }
+
+        [Fact]
+        public void TestCreateAventureControllerIsOk()
+        {
+            AventureController controller = new(_dbcontext);
+            AventureDTO aventure = new()
+            {
+                Id = 0,
+                Nom = "Voici la nouvelle aventure",
+                Description = "une aventure pour tout le monde.",
+                DateCreation = DateTime.Now,
+            };
+            var result = controller.Create(aventure);
+
+            // test -- si tout va bien
+            Assert.NotNull(result);
+            Assert.IsType<RedirectToActionResult>(result);
+
+        }
+
+        [Fact]
+        public void TestCreateAventureControllerIsNoOk()
+        {
+            AventureController controller = new(_dbcontext);
+            AventureDTO aventure = new()
+            {
+                Id = 1,
+                Nom = "Voici la nouvelle aventure",
+                Description = "une aventure pour tout le monde.",
+                DateCreation = DateTime.Now,
+            };
+            var result = controller.Create(aventure);
+
+            // test -- si tout va bien
+            Assert.NotNull(result);
+            Assert.IsNotType<RedirectToActionResult>(result);
+            Assert.IsType<ViewResult>(result);
+
+            var value = (result as ViewResult)?.Model as AventureDTO;
+            Assert.NotNull(value);
+            Assert.Equal(1, value.Id);
+        }
         #endregion
+
 
     }
 }

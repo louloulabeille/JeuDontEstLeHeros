@@ -9,7 +9,7 @@ namespace JeuDontEstLeHeros.Core.Interfaces.WorkOfUnit
 {
     public interface IReponseWorkOfUnit : IDisposable
     {
-        IReponseRepository Entities { get;}
+        IReponseRepository Reponses { get;}
         //public IReponseRepository GetInstance();
         public int save();
     }

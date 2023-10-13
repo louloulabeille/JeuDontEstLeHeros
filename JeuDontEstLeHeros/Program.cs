@@ -1,5 +1,7 @@
 
+using JeuDontEstLeHeros.Instension.App;
 using JeuDontEstLeHeros.UI.Instension.Builder;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContextInstension(builder.Configuration);
 builder.Services.AddRepoDataScopedInstension();
+
 
 var app = builder.Build();
 
@@ -25,8 +28,12 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+/*
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");*/
+
+// méthode d'instension pour ajout de route
+app.AddMapControllerRouteInstensions();
 
 app.Run();

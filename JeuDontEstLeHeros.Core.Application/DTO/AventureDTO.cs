@@ -11,7 +11,7 @@ namespace JeuDontEstLeHeros.Core.Application.DTO
     {
         public int Id { get; set; }
         [Required(ErrorMessage ="Le nom de l'aventure est obligatoire.")]
-        public string Nom { get; set; }
+        public string Nom { get; set; } = string.Empty;
         public string? Description { get; set; }
 
         [DataType(DataType.Date)]

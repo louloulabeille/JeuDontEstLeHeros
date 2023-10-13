@@ -108,7 +108,7 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Controllers
                 } else
                 {
                     AddQuestion();
-                    result = View(paragraphe);   // retourne suir la même page
+                    result = View(paragraphe);   // retour sur la même page
                 }
 
             }
@@ -152,7 +152,7 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Controllers
 
         #region méthode private 
         /// <summary>
-        /// méthode qui construit le select des questions
+        /// méthode qui retourne les données du select des questions
         /// </summary>
         private void AddQuestion()
         {

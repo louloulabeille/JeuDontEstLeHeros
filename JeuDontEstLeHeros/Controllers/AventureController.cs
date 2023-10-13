@@ -38,6 +38,7 @@ namespace JeuDontEstLeHeros.UI.Controllers
         /// <returns></returns>
 
         // public IActionResult Index()
+        //[HttpGet("mes-aventures")]
         public IActionResult Index([FromServices] IAventureWorkOfUnit aventureWorkOfUnit)
         {
             ViewBag.MonTitre = "Aventures";
@@ -116,22 +117,27 @@ namespace JeuDontEstLeHeros.UI.Controllers
             return result;
         }
 
-
+        /// <summary>
+        /// Affichage de l'enregistrement Aventage
+        /// </summary>
+        /// <param name="Id">clé primaire</param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Details(int? Id) { 
             IActionResult result = this.BadRequest();
             try
             {
-                Aventure? aventure = _aventureWorkOfUnit.Aventures.GetAventureById(Id.Value);
-                if (Id is not null && Id > 0 && aventure is not null)
+                if (Id is not null && Id > 0)
                 {
-                    result = this.View(new AventureDTO()
+                    Aventure? aventure = _aventureWorkOfUnit.Aventures.GetAventureById(Id.Value);
+                    result = aventure is not null?this.View(new AventureDTO()
                     {
                         Id = aventure.Id,
                         Nom = aventure.Nom,
                         Description = aventure.Description,
                         DateCreation = aventure.DateCreation,
-                    });
+                    })
+                    :this.RedirectToAction(nameof(Index)); // aventure is null -- redirection vers la liste
                 }
                 else result = this.RedirectToAction(nameof(Index));
             }

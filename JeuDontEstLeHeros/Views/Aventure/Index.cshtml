@@ -19,7 +19,7 @@
         @{
             foreach (var item in Model)
             {
-                <a href="@this.Href("Aventure/Details/" + item.Id)" class="card m-2 border" style="width: 18rem;">
+                <a asp-area="" asp-controller="Aventure" asp-action="Details" asp-route-id="@item.Id" class="card m-2 border" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">@item.Nom</h5>
                     </div>

@@ -26,7 +26,7 @@ namespace Test.JeuDontEstLeHeros
         public void TestListAventureController()
         {
             AventureController controller = new(new AventureWorkOfUnit(_dbcontext));
-            var result = controller.Index();
+            var result = controller.Index(new AventureWorkOfUnit(_dbcontext));
 
             // Asset
             Assert.NotNull(result);

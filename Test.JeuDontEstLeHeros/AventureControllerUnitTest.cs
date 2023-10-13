@@ -1,4 +1,5 @@
 using JeuDontEstLeHeros.Core.Application.DTO;
+using JeuDontEstLeHeros.Core.Application.WorkOfUnit;
 using JeuDontEstLeHeros.Core.Infrastructure.Database;
 using JeuDontEstLeHeros.Core.Models;
 using JeuDontEstLeHeros.UI.Controllers;
@@ -24,7 +25,7 @@ namespace Test.JeuDontEstLeHeros
         [Fact]
         public void TestListAventureController()
         {
-            AventureController controller = new(_dbcontext);
+            AventureController controller = new(new AventureWorkOfUnit(_dbcontext));
             var result = controller.Index();
 
             // Asset
@@ -40,7 +41,7 @@ namespace Test.JeuDontEstLeHeros
         [Fact]
         public void TestCreateAventureControllerIsOk()
         {
-            AventureController controller = new(_dbcontext);
+            AventureController controller = new(new AventureWorkOfUnit(_dbcontext));
             AventureDTO aventure = new()
             {
                 Id = 0,

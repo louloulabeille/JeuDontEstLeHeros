@@ -13,15 +13,18 @@ namespace JeuDontEstLeHeros.Core.Application.WorkOfUnit
     public class ParagrapheWorkOfUnit : IParagrapheWorkOfUnit
     {
         private readonly HerosDbcontext _dbcontext;
-        private readonly IParagrapheRepository _entities;
+        private readonly IParagrapheRepository _paragraphes;
+        private readonly IQuestionRepository _questions;
 
         public ParagrapheWorkOfUnit(HerosDbcontext dbcontext)
         {
             _dbcontext = dbcontext;
-            _entities = new ParagrapheRepository(dbcontext);
+            _paragraphes = new ParagrapheRepository(dbcontext);
+            _questions = new QuestionRepository(dbcontext);
         }
 
-        public IParagrapheRepository Paragraphes => _entities;
+        public IParagrapheRepository Paragraphes => _paragraphes;
+        public IQuestionRepository Questions => _questions;
 
         public void Dispose()
         {

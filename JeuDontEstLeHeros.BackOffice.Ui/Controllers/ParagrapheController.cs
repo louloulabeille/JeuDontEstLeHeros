@@ -13,14 +13,14 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Controllers
     public class ParagrapheController : Controller
     {
         private readonly IParagrapheWorkOfUnit _workOfUnit;
-        private readonly IQuestionWorkOfUnit _questionWorkOfUnit;
+        //private readonly IQuestionWorkOfUnit _questionWorkOfUnit;
 
         public List<SelectListItem> Questions = new ();
 
-        public ParagrapheController(IParagrapheWorkOfUnit workOfUnit, IQuestionWorkOfUnit questionWorkOfUnit)
+        public ParagrapheController(IParagrapheWorkOfUnit workOfUnit)
         {
             _workOfUnit = workOfUnit;
-            _questionWorkOfUnit = questionWorkOfUnit;
+            //_questionWorkOfUnit = questionWorkOfUnit;
         }
 
         #region Action controller
@@ -157,7 +157,7 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Controllers
         private void AddQuestion()
         {
             Questions.Clear();
-            Questions.AddRange(_questionWorkOfUnit.Questions.GetAll().Select(x => new SelectListItem()
+            Questions.AddRange(_workOfUnit.Questions.GetAll().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.Titre,

@@ -21,16 +21,14 @@ namespace JeuDontEstLeHeros.UI.Controllers
 
 
         #region Constructeur
-        public AventureController(HerosDbcontext dbcontext)
+        public AventureController(IAventureWorkOfUnit avantureWorkOfUnit)
         {
             //_logger = logger;
-            _avantureWorkOfUnit = new AventureWorkOfUnit(dbcontext);
+            _avantureWorkOfUnit = avantureWorkOfUnit;
         }
         #endregion
 
-
-        #region Action
-
+        #region 
         /// <summary>
         /// action d'affichage des aventures
         /// </summary>

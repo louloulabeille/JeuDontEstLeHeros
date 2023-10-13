@@ -13,7 +13,7 @@ namespace JeuDontEstLeHeros.UI.Instension.Builder
             services.AddDbContext<HerosDbcontext>(options =>
             {
                 options.UseSqlServer(connectionString);
-            });
+            },ServiceLifetime.Scoped);
         }
     }
 }

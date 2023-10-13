@@ -25,10 +25,11 @@ namespace JeuDontEstLeHeros.Core.Application.WorkOfUnit
 
         public void Dispose()
         {
-            _dbcontext.Dispose();
+            //_dbcontext.Dispose();
+            GC.SuppressFinalize(this);
         }
 
-        public int save()
+        public int Save()
         {
             return _dbcontext.SaveChanges(); 
         }

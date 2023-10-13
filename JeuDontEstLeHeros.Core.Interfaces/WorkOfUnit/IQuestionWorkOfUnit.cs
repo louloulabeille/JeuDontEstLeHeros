@@ -11,6 +11,6 @@ namespace JeuDontEstLeHeros.Core.Interfaces.WorkOfUnit
     {
         public IQuestionRepository Questions { get; }
         //public IQuestionRepository GetInstance();
-        public int save();
+        public int Save();
     }
 }

@@ -49,6 +49,7 @@ namespace JeuDontEstLeHeros.UI.Controllers
                     DateCreation = x.DateCreation,
                 }).ToList();
 
+                _avantureWorkOfUnit.Save();
                 result = this.View(aventures);
 
             }catch
@@ -73,7 +74,7 @@ namespace JeuDontEstLeHeros.UI.Controllers
         /// <returns></returns>
         [HttpGet]
         public IActionResult Create() {
-            var result = View(new AventureDTO());
+            var result = View(Aventure);
 
             return result;
         }
@@ -95,11 +96,10 @@ namespace JeuDontEstLeHeros.UI.Controllers
                     {
                         Id= aventure.Id,
                         Nom = aventure.Nom,
-                        Description = aventure.Description,
+                        Description = aventure.Description??string.Empty,
                         DateCreation = aventure.DateCreation,
                     });
-
-                    
+                    _avantureWorkOfUnit.Save();
                     result = this.RedirectToAction(nameof(Index));
                 }
                 else result = this.View(aventure);

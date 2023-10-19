@@ -13,7 +13,7 @@ namespace JeuDontEstLeHeros.Core.Infrastructure.Database
     {
         public HerosDbcontext CreateDbContext(string[] args)
         {
-            string connectionString = string.Empty;
+            string connectionString;
             /*IConfigurationBuilder builder = new ConfigurationBuilder();
             DirectoryInfo? info = Directory.GetParent(Directory.GetCurrentDirectory());
 

@@ -11,7 +11,7 @@ namespace JeuDontEstLeHeros.Core.Infrastructure.Database
 {
     public class HerosDbcontext : DbContext
     {
-        public HerosDbcontext(DbContextOptions options) : base(options)
+        public HerosDbcontext(DbContextOptions<HerosDbcontext> options) : base(options)
         {
         }
 

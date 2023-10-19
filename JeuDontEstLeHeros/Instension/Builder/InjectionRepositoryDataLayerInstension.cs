@@ -5,7 +5,7 @@ using JeuDontEstLeHeros.Core.Interfaces.Layout;
 using JeuDontEstLeHeros.Core.Interfaces.Repository;
 using JeuDontEstLeHeros.Core.Interfaces.WorkOfUnit;
 
-namespace JeuDontEstLeHeros.UI.Instension.Builder
+namespace JeuDontEstLeHeros.Instension.Builder
 { 
     /// <summary>
     /// class qui appel la méthode d'intension pour les accès aux données de la partie Front de l'application

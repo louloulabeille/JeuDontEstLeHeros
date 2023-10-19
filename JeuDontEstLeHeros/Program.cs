@@ -1,15 +1,22 @@
 
 using JeuDontEstLeHeros.Instension.App;
-using JeuDontEstLeHeros.UI.Instension.Builder;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using JeuDontEstLeHeros.Core.Models.Identity;
+using JeuDontEstLeHeros.Core.Infrastructure.Database;
+using JeuDontEstLeHeros.Instension.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("IdentityHeros") ?? throw new InvalidOperationException("Connection string 'IdentityHeros' not found.");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContextInstension(builder.Configuration);
-builder.Services.AddRepoDataScopedInstension();
 
+builder.Services.AddDefaultIdentity<HerosIdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<HerosIdentityDbContext>();
+builder.Services.AddRepoDataScopedInstension();
+builder.Services.AddAuthenficationGoogleInstension(builder.Configuration); // -> authentification + google
 
 var app = builder.Build();
 
@@ -25,15 +32,15 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
-/*
-app.MapControllerRoute(
+/*app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");*/
 
-// méthode d'instension pour ajout de route
+// mï¿½thode d'instension pour ajout de route
 app.AddMapControllerRouteInstensions();
+app.MapRazorPages();
 
 app.Run();

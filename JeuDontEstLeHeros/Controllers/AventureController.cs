@@ -4,11 +4,13 @@ using JeuDontEstLeHeros.Core.Infrastructure.Database;
 using JeuDontEstLeHeros.Core.Interfaces.WorkOfUnit;
 using JeuDontEstLeHeros.Core.Models;
 using JeuDontEstLeHeros.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace JeuDontEstLeHeros.UI.Controllers
 {
+    [Authorize]
     public class AventureController : Controller
     {
         #region Propriété
@@ -61,13 +63,6 @@ namespace JeuDontEstLeHeros.UI.Controllers
             {
                 result = this.Problem("Problème au niveau de la récupération des données.");
             }
-/*
-            List<AventureDTO> list = new ()
-            {
-                new AventureDTO(){Nom = "L'attaque des titans", Id= 1 , Description = "Des titans attaquent les capitales du monde entier."},
-                new AventureDTO(){Nom = "L'espoir", Id= 2 , Description = "Après la défaite des nains, l'espoir renait après la naissance du nouveau héros."}
-            };
-*/
 
             return result;
         }
@@ -97,7 +92,7 @@ namespace JeuDontEstLeHeros.UI.Controllers
             {
                 if (aventure != null && this.ModelState.IsValid)
                 {
-                    _aventureWorkOfUnit.Aventures.Add(new Core.Models.Aventure()
+                    _aventureWorkOfUnit.Aventures.Add(new Aventure()
                     {
                         Id= aventure.Id,
                         Nom = aventure.Nom,

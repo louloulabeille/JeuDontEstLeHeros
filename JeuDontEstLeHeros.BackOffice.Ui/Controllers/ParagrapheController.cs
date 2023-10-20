@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 
 namespace JeuDontEstLeHeros.BackOffice.Ui.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrator")]
     public class ParagrapheController : Controller
     {
         private readonly IParagrapheWorkOfUnit _workOfUnit;

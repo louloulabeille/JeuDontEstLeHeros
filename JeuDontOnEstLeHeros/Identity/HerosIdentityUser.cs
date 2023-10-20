@@ -14,6 +14,6 @@ namespace JeuDontEstLeHeros.Core.Models.Identity;
 /// /// </summary>
 public class HerosIdentityUser : IdentityUser
 {
-
+    
 }
 

@@ -1,4 +1,7 @@
-﻿@inject SignInManager<IdentityUser> SignInManager
+﻿@using JeuDontEstLeHeros.BackOffice.Ui.Areas.Identity.Pages.Account.Manage;
+@using JeuDontEstLeHeros.Core.Models.Identity;
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<HerosIdentityUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

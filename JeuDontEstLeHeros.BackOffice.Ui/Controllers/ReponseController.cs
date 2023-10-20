@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JeuDontEstLeHeros.BackOffice.Ui.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrator")]
     public class ReponseController : Controller
     {
         private readonly IReponseWorkOfUnit _workOfUnit;

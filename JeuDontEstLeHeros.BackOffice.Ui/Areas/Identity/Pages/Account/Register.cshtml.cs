@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -22,10 +23,12 @@ using Microsoft.Extensions.Logging;
 
 namespace JeuDontEstLeHeros.BackOffice.Ui.Areas.Identity.Pages.Account
 {
+    [Authorize(Roles ="Administrator")]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<HerosIdentityUser> _signInManager;
         private readonly UserManager<HerosIdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUserStore<HerosIdentityUser> _userStore;
         private readonly IUserEmailStore<HerosIdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
@@ -33,12 +36,14 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Areas.Identity.Pages.Account
 
         public RegisterModel(
             UserManager<HerosIdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager,
             IUserStore<HerosIdentityUser> userStore,
             SignInManager<HerosIdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
@@ -121,7 +126,10 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    _logger.LogInformation("Compte créé.");
+
+                    await CreateRoleAsync("Administrator");
+                    await _userManager.AddToRoleAsync(user, "Administrator");
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -176,6 +184,21 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Areas.Identity.Pages.Account
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
             return (IUserEmailStore<HerosIdentityUser>)_userStore;
+        }
+
+        /// <summary>
+        /// méthode de création de Role
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        private async Task CreateRoleAsync (string role)
+        {
+            // création du role Administrator s'il existe pas dans la base
+            if (!await _roleManager.RoleExistsAsync(role))
+            {
+                var identityRole = new IdentityRole(role);
+                await _roleManager.CreateAsync(identityRole);
+            }
         }
     }
 }

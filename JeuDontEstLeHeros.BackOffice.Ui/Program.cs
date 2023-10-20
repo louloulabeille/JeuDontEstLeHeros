@@ -10,7 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContextInstension(builder.Configuration);
 
-builder.Services.AddDefaultIdentity<HerosIdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<HerosIdentityDbContext>();
+builder.Services.AddDefaultIdentity<HerosIdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<HerosIdentityDbContext>();
+    
 builder.Services.AddRepoDataScopedInstension();
 
 var app = builder.Build();

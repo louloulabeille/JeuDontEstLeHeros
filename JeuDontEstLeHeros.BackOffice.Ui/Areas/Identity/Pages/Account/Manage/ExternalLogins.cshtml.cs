@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using JeuDontEstLeHeros.Core.Models.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,14 +17,14 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Areas.Identity.Pages.Account.Manage
 {
     public class ExternalLoginsModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly IUserStore<IdentityUser> _userStore;
+        private readonly UserManager<HerosIdentityUser> _userManager;
+        private readonly SignInManager<HerosIdentityUser> _signInManager;
+        private readonly IUserStore<HerosIdentityUser> _userStore;
 
         public ExternalLoginsModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
-            IUserStore<IdentityUser> userStore)
+            UserManager<HerosIdentityUser> userManager,
+            SignInManager<HerosIdentityUser> signInManager,
+            IUserStore<HerosIdentityUser> userStore)
         {
             _userManager = userManager;
             _signInManager = signInManager;

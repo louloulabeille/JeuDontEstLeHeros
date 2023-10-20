@@ -13,7 +13,7 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Controllers
         private readonly ILogger<RolesController> _logger;
 
         [BindProperty]
-        public RolesDTO? Roles {  get; set; }
+        public RolesDTO? Role {  get; set; } = new RolesDTO();
 
         public RolesController(RoleManager<IdentityRole> roleManager, ILogger<RolesController> logger)
         {
@@ -31,7 +31,7 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Controllers
             var result = _roleManager.Roles.Select(x => new RolesDTO()
             {
                 Id = x.Id,
-                Name = x.Name,
+                Name = x.Name?? string.Empty,
                 NormalizedName = x.NormalizedName,
                 ConcurrencyStamp = x.ConcurrencyStamp,
             });
@@ -47,22 +47,46 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Controllers
         // GET: RolesController/Create
         public ActionResult Create()
         {
-            return View();
+            return View(Role);
         }
 
         // POST: RolesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create([FromForm] RolesDTO roles)
         {
+            ActionResult result = this.View(roles);
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (this.ModelState.IsValid && !string.IsNullOrEmpty(roles.Name))
+                {
+                    if (!await _roleManager.RoleExistsAsync(roles.Name))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole()
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Name = roles.Name,
+                            NormalizedName = roles.NormalizedName,
+                            ConcurrencyStamp = roles.ConcurrencyStamp,
+                        });
+                        result = this.RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        this.ModelState.AddModelError("Name", "Role déjà existant. Veuillez changer le nom.");
+                        result = this.View(roles);
+                    }
+                }
+                else
+                {
+                    result = this.View(roles);
+                }
             }
             catch
             {
-                return View();
+                result = this.NotFound();
             }
+            return result;
         }
 
         // GET: RolesController/Edit/5

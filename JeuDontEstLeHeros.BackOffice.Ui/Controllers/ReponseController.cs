@@ -2,10 +2,12 @@
 using JeuDontEstLeHeros.Core.Infrastructure.Database;
 using JeuDontEstLeHeros.Core.Interfaces.WorkOfUnit;
 using JeuDontEstLeHeros.Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JeuDontEstLeHeros.BackOffice.Ui.Controllers
 {
+    [Authorize]
     public class ReponseController : Controller
     {
         private readonly IReponseWorkOfUnit _workOfUnit;

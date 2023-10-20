@@ -6,13 +6,21 @@ namespace JeuDontEstLeHeros.BackOffice.Ui.Instension.Builder
 {
     public static class DbContextInstension
     {
-        public static void AddDbContextInstension(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddDbContextInstension(this IServiceCollection services, IConfiguration configuration)
         {
             string connectionString = configuration.GetConnectionString("Heros") ?? throw new NullReferenceException();
+            string connectionStringIdentity = configuration["ConnectionStrings:IdentityHeros"] ?? throw new NullReferenceException();
             services.AddDbContext<HerosDbcontext>(options =>
             {
                 options.UseSqlServer(connectionString);
-            });
+            }, ServiceLifetime.Scoped);
+
+            services.AddDbContext<HerosIdentityDbContext>(options=>
+            {
+                options.UseSqlServer(connectionStringIdentity);
+            }, ServiceLifetime.Scoped);
+
+            return services;
         }
     }
 }

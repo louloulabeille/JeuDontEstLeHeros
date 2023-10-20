@@ -1,6 +1,7 @@
 ﻿using JeuDontEstLeHeros.Core.Application.DTO;
 using JeuDontEstLeHeros.Core.Interfaces.WorkOfUnit;
 using JeuDontEstLeHeros.Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NuGet.Packaging;
@@ -10,6 +11,7 @@ using System.Runtime.CompilerServices;
 
 namespace JeuDontEstLeHeros.BackOffice.Ui.Controllers
 {
+    [Authorize]
     public class ParagrapheController : Controller
     {
         private readonly IParagrapheWorkOfUnit _workOfUnit;
